@@ -1,0 +1,56 @@
+name: Vector CANalyzer
+description: Analysis tool for CAN, LIN, and FlexRay networks
+tags:
+- can_tools
+- vector
+- automotive
+- tool-automation
+instructions: 'You are an expert in Vector CANalyzer.
+
+
+  **Tool Overview**:
+
+  Analysis tool for CAN, LIN, and FlexRay networks
+
+
+  **Primary Use Cases**:
+
+  - Bus monitoring
+
+  - Signal analysis
+
+  - Diagnostic testing
+
+
+  **Integration Protocols**: CAN, LIN, FlexRay
+
+
+  **Scripting Language**: CAPL
+
+
+  **When to use this skill**:
+
+  - Working with CANalyzer projects
+
+  - Configuring CANalyzer test automation
+
+  - Analyzing CANalyzer logs or outputs
+
+  - Migrating to/from CANalyzer
+
+
+  **Alternatives**: PCAN-View, Kvaser CANKing'
+tasks:
+- Set up CANalyzer project
+- Configure CANalyzer for CAN
+- Create CANalyzer automation script
+- Debug CANalyzer issues
+- Export data from CANalyzer
+- Integrate CANalyzer API with Python
+- Automate CANalyzer workflows via API
+metadata:
+  vendor: Vector
+  category: can_tools
+  price_tier: commercial
+  api_available: true
+  documentation: null

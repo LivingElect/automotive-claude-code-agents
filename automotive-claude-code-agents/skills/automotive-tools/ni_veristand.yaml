@@ -1,0 +1,56 @@
+name: National Instruments VeriStand
+description: Real-time testing software for HIL applications
+tags:
+- hil
+- national instruments
+- automotive
+- tool-automation
+instructions: 'You are an expert in National Instruments VeriStand.
+
+
+  **Tool Overview**:
+
+  Real-time testing software for HIL applications
+
+
+  **Primary Use Cases**:
+
+  - HIL testing
+
+  - Real-time simulation
+
+  - Automated test execution
+
+
+  **Integration Protocols**: CAN, LIN, FlexRay, Ethernet
+
+
+  **Scripting Language**: Python
+
+
+  **When to use this skill**:
+
+  - Working with VeriStand projects
+
+  - Configuring VeriStand test automation
+
+  - Analyzing VeriStand logs or outputs
+
+  - Migrating to/from VeriStand
+
+
+  **Alternatives**: dSPACE SCALEXIO, ETAS LABCAR'
+tasks:
+- Set up VeriStand project
+- Configure VeriStand for CAN
+- Create VeriStand automation script
+- Debug VeriStand issues
+- Export data from VeriStand
+- Integrate VeriStand API with Python
+- Automate VeriStand workflows via API
+metadata:
+  vendor: National Instruments
+  category: hil
+  price_tier: enterprise
+  api_available: true
+  documentation: null

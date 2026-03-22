@@ -1,0 +1,56 @@
+name: dSPACE ControlDesk
+description: Experiment and instrumentation software for real-time systems
+tags:
+- calibration
+- dspace
+- automotive
+- tool-automation
+instructions: 'You are an expert in dSPACE ControlDesk.
+
+
+  **Tool Overview**:
+
+  Experiment and instrumentation software for real-time systems
+
+
+  **Primary Use Cases**:
+
+  - ECU calibration
+
+  - Real-time data acquisition
+
+  - Automated testing
+
+
+  **Integration Protocols**: CAN, Ethernet, XCP
+
+
+  **Scripting Language**: Python
+
+
+  **When to use this skill**:
+
+  - Working with ControlDesk projects
+
+  - Configuring ControlDesk test automation
+
+  - Analyzing ControlDesk logs or outputs
+
+  - Migrating to/from ControlDesk
+
+
+  **Alternatives**: Vector CANape, ETAS INCA'
+tasks:
+- Set up ControlDesk project
+- Configure ControlDesk for CAN
+- Create ControlDesk automation script
+- Debug ControlDesk issues
+- Export data from ControlDesk
+- Integrate ControlDesk API with Python
+- Automate ControlDesk workflows via API
+metadata:
+  vendor: dSPACE
+  category: calibration
+  price_tier: enterprise
+  api_available: true
+  documentation: null

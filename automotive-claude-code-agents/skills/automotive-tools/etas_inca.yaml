@@ -1,0 +1,56 @@
+name: ETAS INCA
+description: Calibration, diagnostics, and validation tool for ECUs
+tags:
+- calibration
+- etas
+- automotive
+- tool-automation
+instructions: 'You are an expert in ETAS INCA.
+
+
+  **Tool Overview**:
+
+  Calibration, diagnostics, and validation tool for ECUs
+
+
+  **Primary Use Cases**:
+
+  - ECU calibration
+
+  - Parameter tuning
+
+  - Data logging
+
+
+  **Integration Protocols**: CAN, Ethernet, XCP
+
+
+  **Scripting Language**: Python
+
+
+  **When to use this skill**:
+
+  - Working with INCA projects
+
+  - Configuring INCA test automation
+
+  - Analyzing INCA logs or outputs
+
+  - Migrating to/from INCA
+
+
+  **Alternatives**: Vector CANape, dSPACE ControlDesk'
+tasks:
+- Set up INCA project
+- Configure INCA for CAN
+- Create INCA automation script
+- Debug INCA issues
+- Export data from INCA
+- Integrate INCA API with Python
+- Automate INCA workflows via API
+metadata:
+  vendor: ETAS
+  category: calibration
+  price_tier: enterprise
+  api_available: true
+  documentation: null

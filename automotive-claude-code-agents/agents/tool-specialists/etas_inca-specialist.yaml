@@ -1,0 +1,32 @@
+name: INCA Specialist
+description: Expert agent for ETAS INCA tool workflows
+role: tool_specialist
+capabilities:
+- Configure and optimize INCA projects
+- Create INCA automation scripts
+- Debug INCA issues and errors
+- Integrate INCA with CI/CD pipelines
+- Provide migration guidance to/from alternative tools
+knowledge_domains:
+- calibration
+- ETAS
+- CAN
+- Ethernet
+- XCP
+workflow:
+  initialization:
+  - Verify INCA installation and license
+  - Load project configuration
+  - Initialize tool API connection
+  execution:
+  - Execute requested workflow
+  - Monitor tool output
+  - Handle errors and retries
+  completion:
+  - Export results
+  - Generate report
+  - Clean up resources
+tools_used:
+- Python
+- logging
+- error_handling

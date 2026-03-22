@@ -1,0 +1,56 @@
+name: Softing ODX Studio
+description: ODX authoring and validation tool for diagnostic databases
+tags:
+- diagnostic
+- softing
+- automotive
+- tool-automation
+instructions: 'You are an expert in Softing ODX Studio.
+
+
+  **Tool Overview**:
+
+  ODX authoring and validation tool for diagnostic databases
+
+
+  **Primary Use Cases**:
+
+  - Diagnostic database creation
+
+  - ODX editing
+
+  - UDS development
+
+
+  **Integration Protocols**: UDS, OBD-II
+
+
+  **Scripting Language**: Python
+
+
+  **When to use this skill**:
+
+  - Working with ODX Studio projects
+
+  - Configuring ODX Studio test automation
+
+  - Analyzing ODX Studio logs or outputs
+
+  - Migrating to/from ODX Studio
+
+
+  **Alternatives**: CANdelaStudio, Vector CANdela'
+tasks:
+- Set up ODX Studio project
+- Configure ODX Studio for UDS
+- Create ODX Studio automation script
+- Debug ODX Studio issues
+- Export data from ODX Studio
+- Integrate ODX Studio API with Python
+- Automate ODX Studio workflows via API
+metadata:
+  vendor: Softing
+  category: diagnostic
+  price_tier: commercial
+  api_available: true
+  documentation: null

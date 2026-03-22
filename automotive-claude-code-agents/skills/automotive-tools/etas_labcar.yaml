@@ -1,0 +1,56 @@
+name: ETAS LABCAR
+description: Hardware-in-the-Loop (HIL) simulation platform
+tags:
+- hil
+- etas
+- automotive
+- tool-automation
+instructions: 'You are an expert in ETAS LABCAR.
+
+
+  **Tool Overview**:
+
+  Hardware-in-the-Loop (HIL) simulation platform
+
+
+  **Primary Use Cases**:
+
+  - HIL testing
+
+  - ECU validation
+
+  - System integration
+
+
+  **Integration Protocols**: CAN, LIN, FlexRay, Ethernet
+
+
+  **Scripting Language**: MATLAB
+
+
+  **When to use this skill**:
+
+  - Working with LABCAR projects
+
+  - Configuring LABCAR test automation
+
+  - Analyzing LABCAR logs or outputs
+
+  - Migrating to/from LABCAR
+
+
+  **Alternatives**: dSPACE SCALEXIO, National Instruments VeriStand'
+tasks:
+- Set up LABCAR project
+- Configure LABCAR for CAN
+- Create LABCAR automation script
+- Debug LABCAR issues
+- Export data from LABCAR
+- Integrate LABCAR API with Python
+- Automate LABCAR workflows via API
+metadata:
+  vendor: ETAS
+  category: hil
+  price_tier: enterprise
+  api_available: true
+  documentation: null

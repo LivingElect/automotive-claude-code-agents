@@ -1,0 +1,56 @@
+name: Siemens PreScan
+description: Physics-based simulation of ADAS and autonomous vehicles
+tags:
+- simulation
+- siemens
+- automotive
+- tool-automation
+instructions: 'You are an expert in Siemens PreScan.
+
+
+  **Tool Overview**:
+
+  Physics-based simulation of ADAS and autonomous vehicles
+
+
+  **Primary Use Cases**:
+
+  - ADAS validation
+
+  - Sensor simulation
+
+  - Scenario testing
+
+
+  **Integration Protocols**: N/A
+
+
+  **Scripting Language**: MATLAB
+
+
+  **When to use this skill**:
+
+  - Working with PreScan projects
+
+  - Configuring PreScan test automation
+
+  - Analyzing PreScan logs or outputs
+
+  - Migrating to/from PreScan
+
+
+  **Alternatives**: CARLA, IPG CarMaker'
+tasks:
+- Set up PreScan project
+- Configure PreScan for N/A
+- Create PreScan automation script
+- Debug PreScan issues
+- Export data from PreScan
+- Integrate PreScan API with Python
+- Automate PreScan workflows via API
+metadata:
+  vendor: Siemens
+  category: simulation
+  price_tier: enterprise
+  api_available: true
+  documentation: null

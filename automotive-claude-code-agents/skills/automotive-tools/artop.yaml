@@ -1,0 +1,56 @@
+name: Eclipse Foundation Artop
+description: Open-source AUTOSAR tool platform
+tags:
+- autosar
+- eclipse foundation
+- automotive
+- tool-automation
+instructions: 'You are an expert in Eclipse Foundation Artop.
+
+
+  **Tool Overview**:
+
+  Open-source AUTOSAR tool platform
+
+
+  **Primary Use Cases**:
+
+  - AUTOSAR modeling
+
+  - Tool development
+
+  - Custom toolchains
+
+
+  **Integration Protocols**: N/A
+
+
+  **Scripting Language**: Java
+
+
+  **When to use this skill**:
+
+  - Working with Artop projects
+
+  - Configuring Artop test automation
+
+  - Analyzing Artop logs or outputs
+
+  - Migrating to/from Artop
+
+
+  **Alternatives**: EB tresos, Arctic Studio'
+tasks:
+- Set up Artop project
+- Configure Artop for N/A
+- Create Artop automation script
+- Debug Artop issues
+- Export data from Artop
+- Integrate Artop API with Python
+- Automate Artop workflows via API
+metadata:
+  vendor: Eclipse Foundation
+  category: autosar
+  price_tier: free
+  api_available: true
+  documentation: null

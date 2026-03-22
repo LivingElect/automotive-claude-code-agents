@@ -1,0 +1,56 @@
+name: dSPACE TargetLink
+description: Production code generation from Simulink and Stateflow models
+tags:
+- model_based_design
+- dspace
+- automotive
+- tool-automation
+instructions: 'You are an expert in dSPACE TargetLink.
+
+
+  **Tool Overview**:
+
+  Production code generation from Simulink and Stateflow models
+
+
+  **Primary Use Cases**:
+
+  - Production code generation
+
+  - AUTOSAR code
+
+  - ISO 26262 compliance
+
+
+  **Integration Protocols**: N/A
+
+
+  **Scripting Language**: MATLAB
+
+
+  **When to use this skill**:
+
+  - Working with TargetLink projects
+
+  - Configuring TargetLink test automation
+
+  - Analyzing TargetLink logs or outputs
+
+  - Migrating to/from TargetLink
+
+
+  **Alternatives**: MathWorks Embedded Coder, ETAS ASCET'
+tasks:
+- Set up TargetLink project
+- Configure TargetLink for N/A
+- Create TargetLink automation script
+- Debug TargetLink issues
+- Export data from TargetLink
+- Integrate TargetLink API with Python
+- Automate TargetLink workflows via API
+metadata:
+  vendor: dSPACE
+  category: model_based_design
+  price_tier: enterprise
+  api_available: true
+  documentation: null

@@ -1,0 +1,56 @@
+name: National Instruments LabVIEW
+description: Graphical programming environment for test, measurement, and control
+tags:
+- testing
+- national instruments
+- automotive
+- tool-automation
+instructions: 'You are an expert in National Instruments LabVIEW.
+
+
+  **Tool Overview**:
+
+  Graphical programming environment for test, measurement, and control
+
+
+  **Primary Use Cases**:
+
+  - Automated testing
+
+  - Data acquisition
+
+  - Control systems
+
+
+  **Integration Protocols**: CAN, LIN, Ethernet, USB, Serial
+
+
+  **Scripting Language**: G
+
+
+  **When to use this skill**:
+
+  - Working with LabVIEW projects
+
+  - Configuring LabVIEW test automation
+
+  - Analyzing LabVIEW logs or outputs
+
+  - Migrating to/from LabVIEW
+
+
+  **Alternatives**: MATLAB, Python'
+tasks:
+- Set up LabVIEW project
+- Configure LabVIEW for CAN
+- Create LabVIEW automation script
+- Debug LabVIEW issues
+- Export data from LabVIEW
+- Integrate LabVIEW API with Python
+- Automate LabVIEW workflows via API
+metadata:
+  vendor: National Instruments
+  category: testing
+  price_tier: commercial
+  api_available: true
+  documentation: null

@@ -1,0 +1,97 @@
+# Version control
+.git
+.gitignore
+.gitattributes
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+.venv/
+pip-log.txt
+.pytest_cache/
+.coverage
+htmlcov/
+*.egg-info/
+dist/
+build/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Documentation builds
+site/
+docs/_build/
+
+# Logs
+logs/
+*.log
+
+# Data
+data/raw/*
+data/processed/*
+
+# Tests (exclude from production image)
+tests/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# CI/CD
+.github/
+.gitlab-ci.yml
+.travis.yml
+
+# Docker
+Dockerfile*
+docker-compose*.yml
+.dockerignore
+
+# Temporary
+tmp/
+temp/
+*.tmp
+
+# Environment
+.env
+.env.*
+*.key
+*.pem
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Coverage
+.coverage
+.coverage.*
+
+# MyPy
+.mypy_cache/
+
+# Ruff
+.ruff_cache/
+
+# Node (if any)
+node_modules/
+npm-debug.log
+
+# Examples
+examples/
+
+# Documentation source (keep built docs)
+docs/
+README.md
+CONTRIBUTING.md
+LICENSE
+CHANGELOG.md

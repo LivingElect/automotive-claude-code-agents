@@ -1,0 +1,163 @@
+# Pre-commit hooks for Automotive Claude Code
+# See https://pre-commit.com for more information
+
+repos:
+  # General file checks
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+      - id: trailing-whitespace
+        exclude: ^(.*\.md|.*\.txt)$
+      - id: end-of-file-fixer
+        exclude: ^(.*\.md|.*\.txt)$
+      - id: check-yaml
+        args: ['--allow-multiple-documents']
+      - id: check-json
+      - id: check-toml
+      - id: check-added-large-files
+        args: ['--maxkb=1000']
+      - id: check-case-conflict
+      - id: check-merge-conflict
+      - id: check-symlinks
+      - id: detect-private-key
+      - id: mixed-line-ending
+        args: ['--fix=lf']
+      - id: no-commit-to-branch
+        args: ['--branch', 'main', '--branch', 'master']
+
+  # Python code formatting
+  - repo: https://github.com/psf/black
+    rev: 24.8.0
+    hooks:
+      - id: black
+        language_version: python3.11
+        args: ['--line-length=100']
+
+  # Python import sorting
+  - repo: https://github.com/pycqa/isort
+    rev: 5.13.2
+    hooks:
+      - id: isort
+        args: ['--profile', 'black', '--line-length', '100']
+
+  # Python linting
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.6.9
+    hooks:
+      - id: ruff
+        args: ['--fix', '--exit-non-zero-on-fix']
+
+  # Python type checking
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.11.2
+    hooks:
+      - id: mypy
+        additional_dependencies: [types-PyYAML]
+        args: ['--ignore-missing-imports']
+
+  # Python security scanning
+  - repo: https://github.com/PyCQA/bandit
+    rev: 1.7.9
+    hooks:
+      - id: bandit
+        args: ['-c', 'pyproject.toml']
+        additional_dependencies: ['bandit[toml]']
+        exclude: ^tests/
+
+  # YAML linting
+  - repo: https://github.com/adrienverge/yamllint
+    rev: v1.35.1
+    hooks:
+      - id: yamllint
+        args: ['-d', 'relaxed']
+
+  # Markdown linting
+  - repo: https://github.com/igorshubovych/markdownlint-cli
+    rev: v0.41.0
+    hooks:
+      - id: markdownlint
+        args: ['--fix']
+
+  # Shell script linting
+  - repo: https://github.com/shellcheck-py/shellcheck-py
+    rev: v0.10.0.1
+    hooks:
+      - id: shellcheck
+        args: ['--severity=warning']
+
+  # Dockerfile linting
+  - repo: https://github.com/hadolint/hadolint
+    rev: v2.12.0
+    hooks:
+      - id: hadolint-docker
+        args: ['--ignore', 'DL3008', '--ignore', 'DL3013']
+
+  # Secrets detection
+  - repo: https://github.com/Yelp/detect-secrets
+    rev: v1.5.0
+    hooks:
+      - id: detect-secrets
+        args: ['--baseline', '.secrets.baseline']
+        exclude: package.lock.json
+
+  # Automotive-specific checks
+  - repo: local
+    hooks:
+      # Validate skill schemas
+      - id: validate-skills
+        name: Validate skill YAML schemas
+        entry: python -m tools.validators.skill_validator
+        language: system
+        files: ^skills/.*\.yaml$
+        pass_filenames: true
+
+      # Validate agent configurations
+      - id: validate-agents
+        name: Validate agent configurations
+        entry: python -m tools.validators.agent_validator
+        language: system
+        files: ^agents/.*\.yaml$
+        pass_filenames: true
+
+      # Check for safety-critical markers
+      - id: safety-markers
+        name: Check safety-critical code markers
+        entry: bash -c 'grep -n "TODO\|FIXME\|XXX\|HACK" "$@" && exit 1 || exit 0'
+        language: system
+        files: \.(py|yaml)$
+        pass_filenames: true
+
+      # Validate CAN database files
+      - id: validate-dbc
+        name: Validate DBC files
+        entry: python -c "import cantools; import sys; [cantools.database.load_file(f) for f in sys.argv[1:]]"
+        language: system
+        files: \.dbc$
+        pass_filenames: true
+
+      # Check AUTOSAR ARXML validity
+      - id: validate-arxml
+        name: Validate ARXML files
+        entry: python -c "import lxml.etree as ET; import sys; [ET.parse(f) for f in sys.argv[1:]]"
+        language: system
+        files: \.arxml$
+        pass_filenames: true
+
+# Configuration
+default_install_hook_types: [pre-commit, pre-push, commit-msg]
+default_stages: [commit]
+fail_fast: false
+minimum_pre_commit_version: '2.20.0'
+
+# CI configuration
+ci:
+  autofix_commit_msg: |
+    chore: auto fixes from pre-commit hooks
+
+    for more information, see https://pre-commit.ci
+  autofix_prs: true
+  autoupdate_branch: ''
+  autoupdate_commit_msg: 'chore: pre-commit autoupdate'
+  autoupdate_schedule: weekly
+  skip: [mypy, bandit, shellcheck, hadolint-docker]
+  submodules: false

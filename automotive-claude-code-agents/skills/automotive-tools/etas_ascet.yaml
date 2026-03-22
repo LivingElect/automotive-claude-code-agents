@@ -1,0 +1,56 @@
+name: ETAS ASCET
+description: Model-based development and code generation for embedded systems
+tags:
+- model_based_design
+- etas
+- automotive
+- tool-automation
+instructions: 'You are an expert in ETAS ASCET.
+
+
+  **Tool Overview**:
+
+  Model-based development and code generation for embedded systems
+
+
+  **Primary Use Cases**:
+
+  - Model-based design
+
+  - Code generation
+
+  - Software development
+
+
+  **Integration Protocols**: CAN, LIN
+
+
+  **Scripting Language**: C
+
+
+  **When to use this skill**:
+
+  - Working with ASCET projects
+
+  - Configuring ASCET test automation
+
+  - Analyzing ASCET logs or outputs
+
+  - Migrating to/from ASCET
+
+
+  **Alternatives**: MathWorks Simulink, dSPACE TargetLink'
+tasks:
+- Set up ASCET project
+- Configure ASCET for CAN
+- Create ASCET automation script
+- Debug ASCET issues
+- Export data from ASCET
+- Integrate ASCET API with Python
+- Automate ASCET workflows via API
+metadata:
+  vendor: ETAS
+  category: model_based_design
+  price_tier: enterprise
+  api_available: true
+  documentation: null

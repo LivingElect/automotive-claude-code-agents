@@ -1,0 +1,56 @@
+name: National Instruments TestStand
+description: Test management software for automated test systems
+tags:
+- testing
+- national instruments
+- automotive
+- tool-automation
+instructions: 'You are an expert in National Instruments TestStand.
+
+
+  **Tool Overview**:
+
+  Test management software for automated test systems
+
+
+  **Primary Use Cases**:
+
+  - Test sequencing
+
+  - Automated testing
+
+  - Production testing
+
+
+  **Integration Protocols**: N/A
+
+
+  **Scripting Language**: Python
+
+
+  **When to use this skill**:
+
+  - Working with TestStand projects
+
+  - Configuring TestStand test automation
+
+  - Analyzing TestStand logs or outputs
+
+  - Migrating to/from TestStand
+
+
+  **Alternatives**: Vector VT System, Custom Python frameworks'
+tasks:
+- Set up TestStand project
+- Configure TestStand for N/A
+- Create TestStand automation script
+- Debug TestStand issues
+- Export data from TestStand
+- Integrate TestStand API with Python
+- Automate TestStand workflows via API
+metadata:
+  vendor: National Instruments
+  category: testing
+  price_tier: commercial
+  api_available: true
+  documentation: null

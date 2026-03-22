@@ -1,0 +1,56 @@
+name: Vector VT System
+description: Automated ECU and network testing platform
+tags:
+- testing
+- vector
+- automotive
+- tool-automation
+instructions: 'You are an expert in Vector VT System.
+
+
+  **Tool Overview**:
+
+  Automated ECU and network testing platform
+
+
+  **Primary Use Cases**:
+
+  - Regression testing
+
+  - HIL testing
+
+  - Automated test execution
+
+
+  **Integration Protocols**: CAN, LIN, FlexRay, Ethernet
+
+
+  **Scripting Language**: Python
+
+
+  **When to use this skill**:
+
+  - Working with VT System projects
+
+  - Configuring VT System test automation
+
+  - Analyzing VT System logs or outputs
+
+  - Migrating to/from VT System
+
+
+  **Alternatives**: NI TestStand, ETAS LABCAR'
+tasks:
+- Set up VT System project
+- Configure VT System for CAN
+- Create VT System automation script
+- Debug VT System issues
+- Export data from VT System
+- Integrate VT System API with Python
+- Automate VT System workflows via API
+metadata:
+  vendor: Vector
+  category: testing
+  price_tier: enterprise
+  api_available: true
+  documentation: null

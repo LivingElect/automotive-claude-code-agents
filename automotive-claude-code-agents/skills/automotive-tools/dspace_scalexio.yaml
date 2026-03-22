@@ -1,0 +1,56 @@
+name: dSPACE SCALEXIO
+description: Scalable HIL simulator for ECU and software testing
+tags:
+- hil
+- dspace
+- automotive
+- tool-automation
+instructions: 'You are an expert in dSPACE SCALEXIO.
+
+
+  **Tool Overview**:
+
+  Scalable HIL simulator for ECU and software testing
+
+
+  **Primary Use Cases**:
+
+  - HIL testing
+
+  - ADAS validation
+
+  - Powertrain testing
+
+
+  **Integration Protocols**: CAN, LIN, FlexRay, Ethernet, SOME/IP
+
+
+  **Scripting Language**: Python
+
+
+  **When to use this skill**:
+
+  - Working with SCALEXIO projects
+
+  - Configuring SCALEXIO test automation
+
+  - Analyzing SCALEXIO logs or outputs
+
+  - Migrating to/from SCALEXIO
+
+
+  **Alternatives**: ETAS LABCAR, National Instruments VeriStand'
+tasks:
+- Set up SCALEXIO project
+- Configure SCALEXIO for CAN
+- Create SCALEXIO automation script
+- Debug SCALEXIO issues
+- Export data from SCALEXIO
+- Integrate SCALEXIO API with Python
+- Automate SCALEXIO workflows via API
+metadata:
+  vendor: dSPACE
+  category: hil
+  price_tier: enterprise
+  api_available: true
+  documentation: null

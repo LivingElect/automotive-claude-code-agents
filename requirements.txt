@@ -1,0 +1,26 @@
+# Automotive Claude Code - Python Dependencies
+# Production-ready requirements for complete automotive development platform
+
+# Core dependencies
+anthropic>=0.39.0  # Claude API for LLM Council
+openai>=1.54.0     # GPT API for multi-model collaboration
+pyyaml>=6.0.2      # YAML parsing for configs
+python-dotenv>=1.0.0  # Environment variable management
+
+# Automotive protocols
+python-can>=4.4.2  # CAN bus communication
+cantools>=39.4.5   # DBC parsing and CAN message handling
+
+# Testing
+pytest>=8.3.3      # Test framework
+pytest-cov>=5.0.0  # Code coverage
+pytest-asyncio>=0.23.8  # Async test support
+
+# Code quality
+black>=24.8.0      # Code formatting
+ruff>=0.6.9        # Linting
+mypy>=1.11.2       # Type checking
+
+# Documentation
+mkdocs>=1.6.1      # Documentation generation
+mkdocs-material>=9.5.39  # Material theme

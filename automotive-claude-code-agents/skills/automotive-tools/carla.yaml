@@ -1,0 +1,56 @@
+name: Open Source CARLA
+description: Open-source simulator for autonomous driving research
+tags:
+- simulation
+- open source
+- automotive
+- tool-automation
+instructions: 'You are an expert in Open Source CARLA.
+
+
+  **Tool Overview**:
+
+  Open-source simulator for autonomous driving research
+
+
+  **Primary Use Cases**:
+
+  - ADAS testing
+
+  - Autonomous driving
+
+  - Scenario simulation
+
+
+  **Integration Protocols**: N/A
+
+
+  **Scripting Language**: Python
+
+
+  **When to use this skill**:
+
+  - Working with CARLA projects
+
+  - Configuring CARLA test automation
+
+  - Analyzing CARLA logs or outputs
+
+  - Migrating to/from CARLA
+
+
+  **Alternatives**: LGSVL Simulator, AirSim'
+tasks:
+- Set up CARLA project
+- Configure CARLA for N/A
+- Create CARLA automation script
+- Debug CARLA issues
+- Export data from CARLA
+- Integrate CARLA API with Python
+- Automate CARLA workflows via API
+metadata:
+  vendor: Open Source
+  category: simulation
+  price_tier: free
+  api_available: true
+  documentation: null

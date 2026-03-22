@@ -1,0 +1,377 @@
+version: '3.8'
+
+services:
+  # Main application service
+  automotive-claude-code:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: production
+    container_name: automotive-claude-code
+    image: automotive-claude-code:latest
+    restart: unless-stopped
+
+    environment:
+      - ENVIRONMENT=${ENVIRONMENT:-production}
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - LOG_LEVEL=${LOG_LEVEL:-INFO}
+      - PYTHONUNBUFFERED=1
+
+    env_file:
+      - .env
+
+    volumes:
+      # Persistent data
+      - ./data:/app/data
+      - ./logs:/app/logs
+      - ./output:/app/output
+
+      # Configuration overrides
+      - ./configs:/app/configs:ro
+
+      # Development hot-reload (comment out for production)
+      # - ./tools:/app/tools
+      # - ./skills:/app/skills
+
+    ports:
+      - "8000:8000"
+
+    networks:
+      - automotive-network
+
+    healthcheck:
+      test: ["CMD", "python", "-c", "import tools; print('OK')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+    deploy:
+      resources:
+        limits:
+          cpus: '2.0'
+          memory: 4G
+        reservations:
+          cpus: '0.5'
+          memory: 1G
+
+  # Development service with hot-reload
+  dev:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: development
+    container_name: automotive-claude-code-dev
+
+    environment:
+      - ENVIRONMENT=development
+      - DEBUG=true
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+
+    env_file:
+      - .env
+
+    volumes:
+      # Full source mount for development
+      - .:/app
+      - /app/__pycache__
+      - /app/.pytest_cache
+
+    ports:
+      - "8001:8000"
+      - "5678:5678"  # Debug port
+
+    networks:
+      - automotive-network
+
+    command: python -m tools.cli --debug
+
+    profiles:
+      - development
+
+  # Testing service
+  test:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: testing
+    container_name: automotive-claude-code-test
+
+    environment:
+      - ENVIRONMENT=test
+
+    volumes:
+      - ./tests:/app/tests
+      - ./htmlcov:/app/htmlcov
+
+    networks:
+      - automotive-network
+
+    command: pytest tests/ -v --cov=tools --cov-report=html --cov-report=term
+
+    profiles:
+      - testing
+
+  # Documentation service
+  docs:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: docs
+    container_name: automotive-claude-code-docs
+
+    volumes:
+      - ./docs:/app/docs
+      - ./site:/app/site
+
+    ports:
+      - "8080:8000"
+
+    networks:
+      - automotive-network
+
+    command: mkdocs serve -a 0.0.0.0:8000
+
+    profiles:
+      - documentation
+
+  # CAN simulator (optional)
+  can-simulator:
+    image: alpine:latest
+    container_name: can-simulator
+
+    volumes:
+      - ./data/can:/data
+
+    networks:
+      - automotive-network
+
+    command: sleep infinity
+
+    profiles:
+      - simulation
+
+  # Redis cache (optional)
+  redis:
+    image: redis:7-alpine
+    container_name: automotive-redis
+    restart: unless-stopped
+
+    volumes:
+      - redis-data:/data
+
+    ports:
+      - "6379:6379"
+
+    networks:
+      - automotive-network
+
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+    profiles:
+      - cache
+
+  # Kubernetes local development environment (kind)
+  k8s-dev:
+    image: kindest/node:v1.28.0
+    container_name: automotive-k8s-dev
+    privileged: true
+
+    environment:
+      - KIND_EXPERIMENTAL_PROVIDER=docker
+
+    volumes:
+      - ./kubernetes:/kubernetes:ro
+      - ./helm:/helm:ro
+      - k8s-dev-data:/var/lib/containerd
+
+    ports:
+      - "6443:6443"  # K8s API server
+      - "30080:30080"  # NodePort for testing
+
+    networks:
+      - automotive-network
+
+    profiles:
+      - kubernetes
+
+  # K3s lightweight Kubernetes (for edge simulation)
+  k3s-edge:
+    image: rancher/k3s:v1.28.6-k3s2
+    container_name: automotive-k3s-edge
+    privileged: true
+
+    environment:
+      - K3S_KUBECONFIG_OUTPUT=/kubeconfig/kubeconfig.yaml
+      - K3S_KUBECONFIG_MODE=666
+
+    volumes:
+      - k3s-server:/var/lib/rancher/k3s
+      - ./kubernetes:/kubernetes:ro
+      - ./kubeconfig:/kubeconfig
+
+    ports:
+      - "6444:6443"  # K3s API server
+      - "8081:8080"  # HTTP
+
+    networks:
+      - automotive-network
+
+    command: server --disable=traefik --disable=servicelb
+
+    profiles:
+      - kubernetes
+      - edge
+
+  # Prometheus for Kubernetes monitoring
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: automotive-prometheus
+
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus-data:/prometheus
+
+    ports:
+      - "9090:9090"
+
+    networks:
+      - automotive-network
+
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--storage.tsdb.retention.time=30d'
+      - '--web.enable-lifecycle'
+
+    profiles:
+      - monitoring
+      - kubernetes
+
+  # Grafana dashboards (optional)
+  grafana:
+    image: grafana/grafana:latest
+    container_name: automotive-grafana
+
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_PASSWORD:-admin}
+      - GF_USERS_ALLOW_SIGN_UP=false
+      - GF_SERVER_ROOT_URL=http://localhost:3000
+
+    volumes:
+      - grafana-data:/var/lib/grafana
+      - ./monitoring/grafana:/etc/grafana/provisioning:ro
+
+    ports:
+      - "3000:3000"
+
+    networks:
+      - automotive-network
+
+    depends_on:
+      - prometheus
+
+    profiles:
+      - monitoring
+      - kubernetes
+
+  # Jaeger for distributed tracing
+  jaeger:
+    image: jaegertracing/all-in-one:latest
+    container_name: automotive-jaeger
+
+    environment:
+      - COLLECTOR_ZIPKIN_HOST_PORT=:9411
+      - COLLECTOR_OTLP_ENABLED=true
+
+    ports:
+      - "5775:5775/udp"  # Accept zipkin.thrift over compact thrift protocol
+      - "6831:6831/udp"  # Accept jaeger.thrift over compact thrift protocol
+      - "6832:6832/udp"  # Accept jaeger.thrift over binary thrift protocol
+      - "5778:5778"      # Serve configs
+      - "16686:16686"    # Serve frontend
+      - "14250:14250"    # Accept model.proto
+      - "14268:14268"    # Accept jaeger.thrift directly from clients
+      - "14269:14269"    # Admin port
+      - "9411:9411"      # Zipkin compatible endpoint
+      - "4317:4317"      # OTLP gRPC
+      - "4318:4318"      # OTLP HTTP
+
+    networks:
+      - automotive-network
+
+    profiles:
+      - monitoring
+      - kubernetes
+
+  # Kiali for service mesh visualization
+  kiali:
+    image: quay.io/kiali/kiali:latest
+    container_name: automotive-kiali
+
+    environment:
+      - PROMETHEUS_URL=http://prometheus:9090
+      - JAEGER_URL=http://jaeger:16686
+
+    ports:
+      - "20001:20001"
+
+    networks:
+      - automotive-network
+
+    depends_on:
+      - prometheus
+      - jaeger
+
+    profiles:
+      - monitoring
+      - kubernetes
+      - service-mesh
+
+  # Container registry (for local development)
+  registry:
+    image: registry:2
+    container_name: automotive-registry
+
+    environment:
+      - REGISTRY_STORAGE_FILESYSTEM_ROOTDIRECTORY=/data
+
+    volumes:
+      - registry-data:/data
+
+    ports:
+      - "5000:5000"
+
+    networks:
+      - automotive-network
+
+    profiles:
+      - kubernetes
+      - development
+
+networks:
+  automotive-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.28.0.0/16
+
+volumes:
+  redis-data:
+    driver: local
+  prometheus-data:
+    driver: local
+  grafana-data:
+    driver: local
+  k8s-dev-data:
+    driver: local
+  k3s-server:
+    driver: local
+  registry-data:
+    driver: local
