@@ -45,7 +45,7 @@ After:   claude "Generate FMEA for overcurrent protection in ASIL-D BMS" -> 2 mi
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/anthropics/automotive-claude-code-agents.git
+git clone https://github.com/theja0473/automotive-claude-code-agents.git
 cd automotive-claude-code-agents
 
 # 2. Preview what will be installed (no changes made)
