@@ -21,8 +21,15 @@
   <a href="#why-this-exists">Why This Exists</a> |
   <a href="#whats-inside">What's Inside</a> |
   <a href="#domains-covered">Domains</a> |
-  <a href="CONTRIBUTING.md">Contributing</a>
+  <a href="CONTRIBUTING.md">Contributing</a> |
+  <a href="README_CN.md">中文说明</a>
 </p>
+
+---
+
+> **Enhanced Fork** by [Yuxin Zhang](https://github.com/zyx312) (Jilin University / ZHUOYU Technology / DRIVEResearch)
+>
+> This fork adds **China automotive standards compliance** (GB L2/L3/Parking mandatory standards), **deep SOTIF practice** (hazard scenario construction, audit, highway testing, scenario-driven V&V), and **end-to-end AD safety analysis** (E2E safety architecture, DFM benchmarking). See [README_CN.md](README_CN.md) for full details in Chinese.
 
 ---
 
