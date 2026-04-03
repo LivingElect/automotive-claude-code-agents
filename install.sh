@@ -15,10 +15,14 @@ set -euo pipefail
 #
 # Usage:
 #   ./install.sh                          # Install to ~/.claude (append-safe)
-#   ./install.sh --project /path/to/proj  # Install to project .claude/
+#   ./install.sh --project /path/to/proj  # Install to project .claude/ + .opencode/
 #   ./install.sh --dry-run                # Preview without changes
 #   ./install.sh --uninstall              # Remove only automotive components
 #   ./install.sh --status                 # Show what's currently installed
+#
+# Skills are written in OpenCode Agent Skills format (SKILL.md + frontmatter)
+# and mirrored to ~/.config/opencode/skills/ (or <project>/.opencode/skills/).
+# See: https://opencode.ai/docs/skills
 # ============================================================================
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -53,7 +57,7 @@ Append automotive Claude Code agents into an existing workspace.
 This installer NEVER replaces your existing settings, agents, or hooks.
 
 Options:
-  --project DIR    Install to project-specific .claude/ directory
+  --project DIR    Install to <DIR>/.claude/ and <DIR>/.opencode/skills/
   --dry-run        Preview what would be installed without making changes
   --uninstall      Remove only automotive-prefixed components
   --status         Show what automotive components are currently installed
@@ -109,6 +113,9 @@ done
 
 if [[ -n "$PROJECT_DIR" ]]; then
     TARGET_DIR="${PROJECT_DIR}/.claude"
+    OPENCODE_SKILLS_ROOT="${PROJECT_DIR}/.opencode/skills"
+else
+    OPENCODE_SKILLS_ROOT="${HOME}/.config/opencode/skills"
 fi
 
 MANIFEST_FILE="${TARGET_DIR}/.automotive-manifest"
@@ -402,7 +409,23 @@ CMD_MD
 }
 
 # ---------------------------------------------------------------------------
-# Install skills — symlink skill subdirectories (Claude discovers these)
+# OpenCode Agent Skills — SKILL.md frontmatter (https://opencode.ai/docs/skills)
+# Recognized keys: name, description, license, compatibility, metadata
+# description must be 1–1024 characters; name must match directory name
+# ---------------------------------------------------------------------------
+skill_opencode_description() {
+    local category="$1"
+    local count="$2"
+    local desc
+    desc="Automotive ${category} domain: ${count} YAML/MD skill files. Use when working on ${category} systems, standards, and automotive best practices. automotive-claude-code-agents."
+    if ((${#desc} > 1024)); then
+        desc="${desc:0:1021}..."
+    fi
+    printf '%s' "$desc"
+}
+
+# ---------------------------------------------------------------------------
+# Install skills — OpenCode-compatible SKILL.md + mirror for Claude Code
 # ---------------------------------------------------------------------------
 install_skills() {
     local src_dir="${SCRIPT_DIR}/skills"
@@ -414,7 +437,14 @@ install_skills() {
     fi
 
     mkdir -p "$dest_dir"
-    info "Installing skills → ${dest_dir}/"
+    if ! $DRY_RUN; then
+        mkdir -p "$OPENCODE_SKILLS_ROOT"
+    else
+        echo -e "  ${DIM}[DRY-RUN] mkdir -p ${OPENCODE_SKILLS_ROOT}${NC}"
+    fi
+
+    info "Installing skills (Claude) → ${dest_dir}/"
+    info "Installing skills (OpenCode) → ${OPENCODE_SKILLS_ROOT}/"
 
     # Each skill category becomes a namespaced subdirectory
     for category_dir in "$src_dir"/*/; do
@@ -427,59 +457,76 @@ install_skills() {
 
         local dest_name="${NAMESPACE}-${category}"
         local dest_path="${dest_dir}/${dest_name}"
+        local opencode_path="${OPENCODE_SKILLS_ROOT}/${dest_name}"
 
-        # Create a SKILL.md wrapper in a namespaced directory
+        local skill_count
+        skill_count=$(find "$category_dir" -type f \( -name "*.yaml" -o -name "*.md" \) 2>/dev/null | wc -l)
+        skill_count=$((skill_count + 0))
+
+        local oc_desc
+        oc_desc=$(skill_opencode_description "$category" "$skill_count")
+
         if $DRY_RUN; then
-            echo -e "  ${DIM}[DRY-RUN] skill: ${dest_name}/${NC}"
-            (( INSTALLED_COUNT++ )) || true
+            echo -e "  ${DIM}[DRY-RUN] skill: ${dest_name}/ (Claude + OpenCode)${NC}"
+            (( INSTALLED_COUNT += 2 )) || true
             continue
         fi
 
         mkdir -p "$dest_path"
+        mkdir -p "$opencode_path"
 
-        # Generate SKILL.md from the category content
-        local skill_count
-        skill_count=$(find "$category_dir" -type f \( -name "*.yaml" -o -name "*.md" \) | wc -l)
+        # OpenCode / Claude shared body (implementation notes live outside frontmatter)
+        local skill_md_body
+        skill_md_body="# Automotive skill: ${category}
 
-        cat > "${dest_path}/SKILL.md" <<SKILL_MD
----
-name: ${NAMESPACE}-${category}
-description: |
-  Automotive ${category} domain expertise. ${skill_count} skills covering
-  ${category} systems, standards, and best practices for automotive development.
-  Part of automotive-claude-code-agents extension.
-  TRIGGER: When working on automotive ${category} topics.
-allowed-tools: Read, Grep, Glob, Bash
-# automotive-claude-code-agents — installed by install.sh (safe to delete)
----
+This bundle covers automotive **${category}** topics. Loaded by OpenCode \`skill\` tool or Claude Code skills.
 
-# Automotive Skill: ${category}
+## Source content
 
-This skill provides expertise in automotive **${category}** domain.
-
-## Source Content
-
-Skill library location: \`${category_dir}\`
-Total skill files: ${skill_count}
+- Repository path: \`${category_dir}\`
+- Skill files (YAML/MD): **${skill_count}**
+- Symlinked as \`content/\` below for full library access.
 
 ## Usage
 
-Reference the skill files for detailed domain knowledge:
-\`\`\`bash
-ls ${category_dir}
-\`\`\`
+Have the agent load this skill, then read files under \`content/\` for detailed YAML instructions.
+"
 
+        # Frontmatter: only OpenCode-documented keys (https://opencode.ai/docs/skills)
+        cat > "${dest_path}/SKILL.md" <<SKILL_MD
+---
+name: ${dest_name}
+description: >-
+  ${oc_desc}
+license: MIT
+compatibility: opencode
+metadata:
+  package: automotive-claude-code-agents
+  category: "${category}"
+  skill-files: "${skill_count}"
+---
+
+${skill_md_body}
 SKILL_MD
 
-        # Symlink the source content directory for reference
+        cp "${dest_path}/SKILL.md" "${opencode_path}/SKILL.md"
+
+        # Symlink the source content directory for reference (both locations)
         local content_link="${dest_path}/content"
         if [[ -L "$content_link" ]]; then
             rm "$content_link"
         fi
         ln -s "$category_dir" "$content_link"
 
+        content_link="${opencode_path}/content"
+        if [[ -L "$content_link" ]]; then
+            rm "$content_link"
+        fi
+        ln -s "$category_dir" "$content_link"
+
         manifest_add "$dest_path"
-        (( INSTALLED_COUNT++ )) || true
+        manifest_add "$opencode_path"
+        (( INSTALLED_COUNT += 2 )) || true
     done
 }
 
@@ -770,6 +817,7 @@ if ! $DRY_RUN; then
     echo "    - Agents:       ${TARGET_DIR}/agents/${NAMESPACE}-*.md"
     echo "    - Commands:     ${TARGET_DIR}/commands/${NAMESPACE}/"
     echo "    - Skills:       ${TARGET_DIR}/skills/${NAMESPACE}-*/"
+    echo "    - OpenCode:     ${OPENCODE_SKILLS_ROOT}/${NAMESPACE}-*/ (SKILL.md + content/)"
     echo "    - Rules:        ${TARGET_DIR}/rules/${NAMESPACE}-*.md"
     echo "    - Hooks:        ${TARGET_DIR}/hooks/${NAMESPACE}-*.sh"
     echo "    - Knowledge:    ${TARGET_DIR}/knowledge-base/${NAMESPACE}"

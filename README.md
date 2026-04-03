@@ -67,6 +67,10 @@ claude "Help me design an AUTOSAR Adaptive service for camera fusion"
 
 That's it. Your existing Claude Code workspace (settings, agents, hooks) is **never modified**. All automotive content is namespaced with an `automotive-` prefix and tracked in a manifest for clean removal.
 
+### OpenCode
+
+The installer writes the same skills in [OpenCode Agent Skills](https://opencode.ai/docs/skills) format (`SKILL.md` with `name`, `description`, `license`, `compatibility`, `metadata`) and mirrors them to `~/.config/opencode/skills/` (or `<project>/.opencode/skills/` when using `--project`). The repo root `opencode.json` allows loading `automotive-*` skills via the built-in `skill` tool. Use OpenCode in a project that has this file, or copy `opencode.json` into your app repo.
+
 ```bash
 # Check what's installed
 ./install.sh --status
