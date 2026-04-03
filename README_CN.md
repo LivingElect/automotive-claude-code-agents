@@ -78,20 +78,45 @@
 
 ```bash
 # 1. 克隆仓库
-git clone https://github.com/zyx312/automotive-claude-code-agents.git
+git clone https://github.com/LivingElect/automotive-claude-code-agents.git
 cd automotive-claude-code-agents
 
 # 2. 预览安装内容（不做任何更改）
 ./install.sh --dry-run
 
-# 3. 安装到你的 ~/.claude 工作区
+# 3. 安装到本机 ~/.claude，并同步 OpenCode 技能目录（~/.config/opencode/skills/）
 ./install.sh
+# 若仅在某业务工程内使用，可指定：
+# ./install.sh --project /你的工程路径
 
-# 4. 开始使用
+# 4. 使用 Claude Code 时示例
 claude "分析我的 ACC 系统是否符合中国 L2 强标要求"
 claude "为我的 AEB 系统进行 SOTIF 触发条件识别"
 claude "评估端到端感知模型的安全性"
 ```
+
+## OpenCode 使用方法
+
+本仓库安装脚本会按 [OpenCode Agent Skills](https://opencode.ai/docs/skills) 生成 **`SKILL.md`**，其中 **`description` 为中文**，并安装到 OpenCode 可发现的目录。
+
+| 场景 | OpenCode 技能目录 |
+|------|-------------------|
+| 执行 `./install.sh`（默认） | `~/.config/opencode/skills/automotive-<领域>/` |
+| 执行 `./install.sh --project /path` | `/path/.opencode/skills/automotive-<领域>/` |
+
+每个技能目录包含 **`SKILL.md`** 与指向本仓库 **`skills/<领域>/`** 的 **`content/`** 符号链接。
+
+**建议步骤：**
+
+1. 安装 [OpenCode](https://opencode.ai/docs) 并配置模型与 API（如 `/connect`）。  
+2. 在本仓库根目录或目标工程执行 **`./install.sh`**（工程场景使用 **`--project`**）。  
+3. **`cd` 到含有 **`opencode.json`** 的目录**（可直接用本仓库根目录，或将 `opencode.json` 复制到你的工程根），运行 **`opencode`**。  
+4. 在对话中通过内置 **`skill`** 工具按名称加载技能（与文件夹名一致，例如 `automotive-adas`、`automotive-china-standards` 等）。  
+5. 需要细节时，让智能体读取该技能下 **`content/`** 中的 YAML 文件。
+
+**说明：** 与 Claude Code 不同，OpenCode 使用 **`skill`** 工具按名加载，不依赖 `claude` 或 `/automotive` 斜杠命令。更完整的说明见 **SOURCE_OF_TRUTH.md** 中的「OpenCode 使用方法」。
+
+**Windows：** 若符号链接失败，请在开发者模式或管理员环境下用 **Git Bash / WSL** 执行 **`./install.sh`**。
 
 ## 使用示例
 

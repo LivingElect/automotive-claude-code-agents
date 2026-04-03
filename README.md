@@ -69,7 +69,7 @@ That's it. Your existing Claude Code workspace (settings, agents, hooks) is **ne
 
 ### OpenCode
 
-The installer writes the same skills in [OpenCode Agent Skills](https://opencode.ai/docs/skills) format (`SKILL.md` with `name`, `description`, `license`, `compatibility`, `metadata`) and mirrors them to `~/.config/opencode/skills/` (or `<project>/.opencode/skills/` when using `--project`). The repo root `opencode.json` allows loading `automotive-*` skills via the built-in `skill` tool. Use OpenCode in a project that has this file, or copy `opencode.json` into your app repo.
+Skills are installed in [OpenCode Agent Skills](https://opencode.ai/docs/skills) format (`SKILL.md`; Chinese descriptions) under `~/.config/opencode/skills/` or `<project>/.opencode/skills/` with `--project`. Root `opencode.json` grants `automotive-*` skill permissions. **Full Chinese guide:** [README_CN.md](README_CN.md) (section *OpenCode 使用方法*) and [SOURCE_OF_TRUTH.md](SOURCE_OF_TRUTH.md) (*OpenCode 使用方法*).
 
 ```bash
 # Check what's installed

@@ -417,7 +417,7 @@ skill_opencode_description() {
     local category="$1"
     local count="$2"
     local desc
-    desc="Automotive ${category} domain: ${count} YAML/MD skill files. Use when working on ${category} systems, standards, and automotive best practices. automotive-claude-code-agents."
+    desc="汽车领域「${category}」技能包：共 ${count} 个 YAML/MD 文件。适用于 ${category} 相关系统、标准与车载工程实践。来源 automotive-claude-code-agents。"
     if ((${#desc} > 1024)); then
         desc="${desc:0:1021}..."
     fi
@@ -475,21 +475,21 @@ install_skills() {
         mkdir -p "$dest_path"
         mkdir -p "$opencode_path"
 
-        # OpenCode / Claude shared body (implementation notes live outside frontmatter)
+        # OpenCode / Claude 共用正文（frontmatter 外为中文说明）
         local skill_md_body
-        skill_md_body="# Automotive skill: ${category}
+        skill_md_body="# 汽车领域技能：${category}
 
-This bundle covers automotive **${category}** topics. Loaded by OpenCode \`skill\` tool or Claude Code skills.
+本技能包覆盖 **${category}** 相关主题。可通过 OpenCode 的 \`skill\` 工具或 Claude Code 技能机制加载。
 
-## Source content
+## 源码与内容
 
-- Repository path: \`${category_dir}\`
-- Skill files (YAML/MD): **${skill_count}**
-- Symlinked as \`content/\` below for full library access.
+- 仓库内路径：\`${category_dir}\`
+- 技能文件（YAML/MD）数量：**${skill_count}**
+- 目录 \`content/\` 为指向上述源码路径的符号链接，便于读取完整技能库。
 
-## Usage
+## 用法
 
-Have the agent load this skill, then read files under \`content/\` for detailed YAML instructions.
+加载本技能后，请让智能体读取 \`content/\` 下的 YAML 文件以获取详细说明。
 "
 
         # Frontmatter: only OpenCode-documented keys (https://opencode.ai/docs/skills)

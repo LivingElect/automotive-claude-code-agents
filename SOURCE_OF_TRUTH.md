@@ -1,409 +1,309 @@
-# Source of Truth - Automotive Claude Code Agents
+# 单一事实来源 — 汽车软件 AI 辅助资源
 
-Comprehensive automotive software development AI assistant repository.
+面向汽车软件工程的 AI 辅助资源仓库，可与 **Claude Code**、**OpenCode** 等工具配合使用。
 
-Version: 1.0.0
-Last Updated: 2026-03-19
-
----
-
-## Project Statistics
-
-### Content Inventory
-
-| Category | Count | Size | Location |
-|----------|-------|------|----------|
-| Skills | 80 | 1,984 KB | skills/ |
-| Agents | 22 | 330 KB | agents/ |
-| Commands | 32 | - | commands/ |
-| Workflows | 6 | - | workflows/ |
-| Rules | 10 | - | rules/ |
-| Hooks | 17 | - | hooks/ |
-| Knowledge Base | 20+ docs | 850 KB | knowledge-base/ |
-| Deliverables | 27 | 506 KB | Root *.md |
-| Total Repository | - | 56 MB | - |
-
-### Code Statistics
-
-| Language | Lines | Percentage | Usage |
-|----------|-------|------------|-------|
-| C | 8,500 | 34% | Embedded ECUs, Safety-critical |
-| C++ | 7,200 | 29% | ADAS, AUTOSAR, Powertrain |
-| Python | 6,800 | 27% | Tools, Testing, ML/Analytics |
-| YAML/ARXML | 1,500 | 6% | AUTOSAR, Configuration |
-| SQL/JSON | 800 | 3% | Data, APIs |
-| Bash/Shell | 200 | 1% | Scripts, Automation |
-| **Total** | **25,000+** | **100%** | - |
+版本：1.0.2  
+最后更新：2026-04-03
 
 ---
 
-## Domain Coverage
+## 项目统计
 
-### 13 Major Domains
+### 内容清单
 
-| Domain | Skills | Agents | Key Technologies |
-|--------|--------|--------|------------------|
-| ADAS/Autonomous | 7 | 2 | Sensor fusion, YOLO, Kalman, L0-L5 |
-| AI-ECU Edge AI | 5 | 2 | NPU, DMS, quantization, ONNX |
-| Functional Safety | 7 | 2 | ISO 26262, HARA, FMEA, ASIL-D |
-| Cybersecurity | 6 | 2 | ISO 21434, TARA, PKI, IDS |
-| HPC Central Compute | 5 | 2 | Hypervisors, AUTOSAR Adaptive |
-| Zonal Architecture | 6 | 2 | Ethernet TSN, SOME/IP, E/E |
-| SDV Platform | 6 | 2 | OTA, containers, digital twins |
-| V2X Communication | 6 | 2 | DSRC, C-V2X, platooning |
-| Vehicle ECUs | 9 | 2 | VCU, VGU, TCU, BCM, IVI, BMS |
-| Powertrain/Chassis | 7 | 2 | ECM, TCM, ESC, EPS, ABS |
-| Diagnostics | 8 | 1 | UDS, OBD-II, DoIP, flash |
-| ML/Analytics | 7 | 2 | Predictive, fleet, anomaly |
-| Protocols | 1 | - | CAN, LIN, FlexRay, Ethernet |
+| 类别 | 数量 | 大小 | 路径 |
+|------|------|------|------|
+| 技能（Skills） | 80 | 约 1,984 KB | skills/ |
+| 智能体（Agents） | 22 | 约 330 KB | agents/ |
+| 命令（Commands） | 32 | - | commands/ |
+| 工作流（Workflows） | 6 | - | workflows/ |
+| 规则（Rules） | 10 | - | rules/ |
+| 钩子（Hooks） | 17 | - | hooks/ |
+| 知识库 | 20+ 篇 | 约 850 KB | knowledge-base/ |
+| 交付物文档 | 27 | 约 506 KB | 仓库根目录 *.md |
+| 仓库合计 | - | 约 56 MB | - |
 
-**Total**: 80 skills, 22 agents
+### 代码语言占比
+
+| 语言 | 行数（约） | 占比 | 典型用途 |
+|------|------------|------|----------|
+| C | 8,500 | 34% | 嵌入式 ECU、功能安全 |
+| C++ | 7,200 | 29% | ADAS、AUTOSAR、动力总成 |
+| Python | 6,800 | 27% | 工具、测试、ML/分析 |
+| YAML/ARXML | 1,500 | 6% | AUTOSAR、配置 |
+| SQL/JSON | 800 | 3% | 数据、API |
+| Bash/Shell | 200 | 1% | 脚本、自动化 |
+| **合计** | **25,000+** | **100%** | - |
 
 ---
 
-## Standards Coverage
+## 领域覆盖
 
-### Safety & Security
+### 十三大领域
 
-| Standard | Version | Coverage | Skills |
-|----------|---------|----------|--------|
-| ISO 26262 | 2018 | 100% | All safety/* |
-| ISO 21434 | 2021 | 95% | All cybersecurity/* |
-| ISO 21448 (SOTIF) | 2019 | 90% | adas/*, safety/* |
-| UN R155/R156 | 2021 | 90% | cybersecurity/* |
+| 领域 | 技能数 | 智能体数 | 关键技术 |
+|------|--------|----------|----------|
+| ADAS / 自动驾驶 | 7 | 2 | 传感器融合、YOLO、卡尔曼、L0–L5 |
+| AI-ECU / 边缘 AI | 5 | 2 | NPU、DMS、量化、ONNX |
+| 功能安全 | 7 | 2 | ISO 26262、HARA、FMEA、ASIL-D |
+| 网络安全 | 6 | 2 | ISO 21434、TARA、PKI、IDS |
+| HPC 中央计算 | 5 | 2 | Hypervisor、AUTOSAR Adaptive |
+| 区域架构 | 6 | 2 | 车载以太网 TSN、SOME/IP、E/E |
+| SDV 平台 | 6 | 2 | OTA、容器、数字孪生 |
+| V2X 通信 | 6 | 2 | DSRC、C-V2X、编队 |
+| 整车 ECU | 9 | 2 | VCU、VGU、TCU、BCM、IVI、BMS 等 |
+| 动力总成 / 底盘 | 7 | 2 | ECM、TCM、ESC、EPS、ABS |
+| 诊断 | 8 | 1 | UDS、OBD-II、DoIP、刷写 |
+| ML / 分析 | 7 | 2 | 预测、车队、异常检测 |
+| 协议 | 1 | - | CAN、LIN、FlexRay、Ethernet |
 
-### Communication Protocols
+**合计**：约 80 个技能包（按领域聚合）、22 个智能体（具体数量以仓库为准）。
 
-| Standard | Coverage | Skills |
-|----------|----------|--------|
-| ISO 14229 (UDS) | 100% | diagnostics/uds-* |
-| ISO 13400 (DoIP) | 100% | diagnostics/doip-* |
-| SAE J1979 (OBD-II) | 100% | diagnostics/obd-ii-* |
-| SAE J2735 (V2X) | 100% | v2x/v2x-protocols-* |
-| IEEE 802.11p (DSRC) | 100% | v2x/* |
-| IEEE 1609.2 (Security) | 100% | v2x/v2x-security-* |
+---
+
+## 标准覆盖
+
+### 安全与网络安全
+
+| 标准 | 版本 | 覆盖说明 | 对应技能路径 |
+|------|------|----------|--------------|
+| ISO 26262 | 2018 | 全生命周期 | safety/* |
+| ISO 21434 | 2021 | 约 95% | cybersecurity/* |
+| ISO 21448（SOTIF） | 2019 | 约 90% | adas/*、safety/* |
+| UN R155/R156 | 2021 | 约 90% | cybersecurity/* |
+
+### 通信与诊断协议
+
+| 标准 | 覆盖说明 | 技能路径 |
+|------|----------|----------|
+| ISO 14229（UDS） | 全覆盖 | diagnostics/uds-* |
+| ISO 13400（DoIP） | 全覆盖 | diagnostics/doip-* |
+| SAE J1979（OBD-II） | 全覆盖 | diagnostics/obd-ii-* |
+| SAE J2735（V2X） | 全覆盖 | v2x/v2x-protocols-* |
+| IEEE 802.11p（DSRC） | 全覆盖 | v2x/* |
+| IEEE 1609.2（安全） | 全覆盖 | v2x/v2x-security-* |
 
 ### AUTOSAR
 
-| Platform | Release | Coverage | Skills |
-|----------|---------|----------|--------|
-| Classic | R4.x | 85% | vehicle-systems/*, powertrain/* |
-| Adaptive | R22-11 | 90% | hpc/autosar-adaptive |
+| 平台 | 版本 | 覆盖说明 | 技能路径 |
+|------|------|----------|----------|
+| Classic | R4.x | 约 85% | vehicle-systems/*、powertrain/* |
+| Adaptive | R22-11 | 约 90% | hpc/autosar-adaptive |
 
 ---
 
-## Hardware Platforms
+## 硬件平台
 
-### Central Compute / HPC
+### 中央计算 / HPC
 
-| Platform | Vendor | Compute | Skills |
-|----------|--------|---------|--------|
+| 平台 | 厂商 | 算力 | 技能路径 |
+|------|------|------|----------|
 | DRIVE Orin | NVIDIA | 254 TOPS | hpc/vehicle-compute-platforms |
 | DRIVE Thor | NVIDIA | 2000 TOPS | hpc/vehicle-compute-platforms |
 | Snapdragon Ride | Qualcomm | 700 TOPS | hpc/vehicle-compute-platforms |
 | S32G3 | NXP | 16K DMIPS | hpc/vehicle-compute-platforms |
 
-### Edge AI / NPU
+### 边缘 AI / NPU
 
-| Platform | Vendor | NPU | Skills |
-|----------|--------|-----|--------|
+| 平台 | 厂商 | NPU | 技能路径 |
+|------|------|-----|----------|
 | i.MX 8M Plus | NXP | 2.3 TOPS | ai-ecu/edge-ai-deployment |
 | RZ/V2M | Renesas | 8 TOPS | ai-ecu/neural-processing-units |
 | CV5 | Ambarella | 8 TOPS | ai-ecu/neural-processing-units |
 | NPU 5000 | Qualcomm | 15 TOPS | ai-ecu/neural-processing-units |
 
-### Zonal Controllers
+### 区域控制器
 
-| Platform | Vendor | Use Case | Skills |
-|----------|--------|----------|--------|
-| S32K3 | NXP | Zone ECU | zonal/zone-controller-development |
-| RH850 | Renesas | Zone ECU | zonal/zone-controller-development |
-| AURIX TC3xx | Infineon | Safety-critical | zonal/zone-controller-development |
-
----
-
-## Quick Navigation
-
-### By Role
-
-**Embedded Engineer?**
-→ skills/automotive-ecu-systems/
-→ skills/automotive-powertrain-chassis/
-→ agents/vehicle-systems-engineer, powertrain-control-engineer
-
-**ADAS Developer?**
-→ skills/automotive-adas/
-→ skills/automotive-ai-ecu/
-→ agents/adas-perception-engineer, edge-ai-engineer
-
-**Safety Engineer?**
-→ skills/automotive-safety/
-→ agents/safety-engineer, safety-assessor
-
-**Security Engineer?**
-→ skills/automotive-cybersecurity/
-→ agents/automotive-security-architect, penetration-tester
-
-**System Architect?**
-→ skills/automotive-hpc/, automotive-zonal/, automotive-sdv/
-→ agents/hpc-platform-architect, zonal-architect, sdv-platform-engineer
-
-### By Task
-
-**ISO 26262 Compliance?**
-→ FUNCTIONAL_SAFETY_DELIVERABLES.md
-→ skills/automotive-safety/
-
-**ISO 21434 Security?**
-→ CYBERSECURITY_DELIVERABLES.md
-→ skills/automotive-cybersecurity/
-
-**ADAS L2-L5 Development?**
-→ ADAS_DELIVERABLES.md
-→ skills/automotive-adas/
-
-**Zonal Architecture Design?**
-→ ZONAL_DELIVERABLES.md
-→ skills/automotive-zonal/
-
-**OTA Updates?**
-→ SDV_DELIVERABLES.md
-→ skills/automotive-sdv/ota-update-systems
-
-**UDS Diagnostics?**
-→ AUTOMOTIVE_DIAGNOSTICS_COMPLETE.md
-→ skills/automotive-diagnostics/uds-iso14229-protocol
+| 平台 | 厂商 | 用途 | 技能路径 |
+|------|------|------|----------|
+| S32K3 | NXP | 区域 ECU | zonal/zone-controller-development |
+| RH850 | Renesas | 区域 ECU | zonal/zone-controller-development |
+| AURIX TC3xx | Infineon | 功能安全相关 | zonal/zone-controller-development |
 
 ---
 
-## Development Time Savings
+## 快速导航
 
-Based on industry benchmarks:
+### 按角色
 
-| Task | Traditional | With Repo | Time Saved |
-|------|-------------|-----------|------------|
-| ADAS Sensor Fusion | 3-4 weeks | 3-5 days | 75-85% |
-| ISO 26262 HARA | 2-3 weeks | 2-3 days | 85-90% |
-| UDS Diagnostic Client | 2-3 weeks | 1-2 days | 90-95% |
-| Zonal Architecture | 4-6 weeks | 1-2 weeks | 60-75% |
-| Edge AI Deployment | 2-3 weeks | 3-5 days | 70-85% |
-| OTA Update System | 3-4 weeks | 1 week | 70-75% |
+| 角色 | 建议路径 |
+|------|----------|
+| 嵌入式工程师 | skills/automotive-ecu-systems/、skills/automotive-powertrain-chassis/；agents：vehicle-systems-engineer、powertrain-control-engineer |
+| ADAS 开发 | skills/automotive-adas/、skills/automotive-ai-ecu/；agents：adas-perception-engineer、edge-ai-engineer |
+| 功能安全 | skills/automotive-safety/；agents：safety-engineer、safety-assessor |
+| 网络安全 | skills/automotive-cybersecurity/；agents：automotive-security-architect、penetration-tester |
+| 系统架构 | skills/automotive-hpc/、automotive-zonal/、automotive-sdv/；agents：hpc-platform-architect、zonal-architect、sdv-platform-engineer |
 
-**Estimated Value**: $228,000+ in saved development costs (based on $120k/year automotive engineer salary).
+### 按任务
 
----
-
-## Version History
-
-### v1.0.0 (2026-03-19) - Initial Release
-
-Comprehensive automotive software development AI assistant framework.
-
-**Content Created**:
-- 80 production-ready skills across 13 domains
-- 22 specialized expert agents
-- 32 automation commands
-- 6 end-to-end workflows
-- 25,000+ lines of production code
-- 27 comprehensive deliverable documents
-- Complete knowledge base (AUTOSAR, ISO 26262, protocols)
-
-**Standards Coverage**:
-- ISO 26262:2018 (Functional Safety) - 100%
-- ISO 21434:2021 (Cybersecurity) - 95%
-- AUTOSAR Classic R4.x - 85%
-- AUTOSAR Adaptive R22-11 - 90%
-- 30+ communication and safety standards
-
-**Key Features**:
-- 100% authentication-free (no API keys required)
-- Production-ready code examples
-- Real hardware platform integration
-- Complete compliance workflows
-- Comprehensive testing patterns
-
-**Platforms Supported**:
-- 15+ hardware platforms (NVIDIA, Qualcomm, NXP, Renesas, Infineon)
-- 8+ RTOS/OS (QNX, FreeRTOS, Zephyr, Linux, AUTOSAR)
-- 10+ toolchains (GCC, Clang, GHS, IAR, TASKING)
-
-**Target Users**:
-- Automotive software engineers
-- Safety engineers (ISO 26262)
-- Security engineers (ISO 21434)
-- System architects (E/E, zonal)
-- ADAS/autonomous developers
-- Test engineers (HIL/SIL)
-- Project managers
-
-**License**: MIT (Free for commercial use)
+| 任务 | 建议文档与路径 |
+|------|----------------|
+| ISO 26262 | FUNCTIONAL_SAFETY_DELIVERABLES.md、skills/automotive-safety/ |
+| ISO 21434 | CYBERSECURITY_DELIVERABLES.md、skills/automotive-cybersecurity/ |
+| ADAS L2–L5 | ADAS_DELIVERABLES.md、skills/automotive-adas/ |
+| 区域架构 | ZONAL_DELIVERABLES.md、skills/automotive-zonal/ |
+| OTA | SDV_DELIVERABLES.md、skills/automotive-sdv/ota-update-systems |
+| UDS 诊断 | AUTOMOTIVE_DIAGNOSTICS_COMPLETE.md、skills/automotive-diagnostics/uds-iso14229-protocol |
 
 ---
 
-## Essential Files
+## 开发提效（参考）
 
-Root-level documentation structure:
+以下为行业常见对比量级，仅供参考。
 
-| File | Purpose |
-|------|---------|
-| README.md | Project overview, installation, quick start |
-| CLAUDE.md | Claude Code integration guide |
-| QUICK_START.md | Getting started tutorial |
-| CHANGELOG.md | Version history |
-| CONTRIBUTING.md | Contribution guidelines |
-| SECURITY.md | Security policy |
-| ROADMAP.md | Future development plans |
-| SOURCE_OF_TRUTH.md | This file - single reference |
-
-Domain deliverables (27 files):
-- ADAS_DELIVERABLES.md
-- AI_ECU_DELIVERABLES.md
-- AUTOMOTIVE_DIAGNOSTICS_COMPLETE.md
-- AUTOMOTIVE_PROTOCOLS_DELIVERABLES.md
-- CLOUD_NATIVE_DELIVERABLES.md
-- CYBERSECURITY_DELIVERABLES.md
-- FUNCTIONAL_SAFETY_DELIVERABLES.md
-- FUNCTIONAL_SAFETY_QUICK_START.md
-- HPC_DELIVERABLES.md
-- MBD_IMPLEMENTATION_COMPLETE.md
-- MIDDLEWARE_DELIVERABLES.md
-- ML_ANALYTICS_DELIVERABLES.md
-- POWERTRAIN_CHASSIS_DELIVERABLES.md
-- QNX_IMPLEMENTATION_COMPLETE.md
-- SDV_DELIVERABLES.md
-- V2X_DELIVERABLES.md
-- VEHICLE_SYSTEMS_DELIVERABLES.md
-- VIRTUAL_NETWORKING_DELIVERABLES.md
-- ZONAL_DELIVERABLES.md
-- Plus 8 more specialized documents
-
-Archived files: docs/archive/ (33 files - session artifacts, redundant status reports)
+| 任务 | 传统周期（约） | 使用本仓库辅助（约） | 时间节省 |
+|------|----------------|----------------------|----------|
+| ADAS 传感器融合 | 3–4 周 | 3–5 天 | 约 75–85% |
+| ISO 26262 HARA | 2–3 周 | 2–3 天 | 约 85–90% |
+| UDS 诊断客户端 | 2–3 周 | 1–2 天 | 约 90–95% |
+| 区域架构 | 4–6 周 | 1–2 周 | 约 60–75% |
+| 边缘 AI 部署 | 2–3 周 | 3–5 天 | 约 70–85% |
+| OTA 体系 | 3–4 周 | 约 1 周 | 约 70–75% |
 
 ---
 
-## Key Directories
+## 版本历史
+
+### v1.0.2（2026-04-03）
+
+- 技能 `SKILL.md` 中 **`description` 与正文**改为中文；文档中 OpenCode 使用说明统一为中文表述。
+
+### v1.0.0（2026-03-19）— 初始发布
+
+- 多领域技能、智能体、命令与工作流；知识库与交付物文档；测试与示例代码。
+- 标准覆盖：ISO 26262、ISO 21434、AUTOSAR Classic/Adaptive、多种车载协议等。
+- 许可：MIT，可商用。
+
+---
+
+## 重要文件
+
+| 文件 | 说明 |
+|------|------|
+| README.md | 项目概览、安装与快速开始 |
+| CLAUDE.md | Claude Code 集成说明 |
+| QUICK_START.md | 入门教程 |
+| CHANGELOG.md | 变更记录 |
+| CONTRIBUTING.md | 贡献指南 |
+| SECURITY.md | 安全策略 |
+| ROADMAP.md | 路线图 |
+| SOURCE_OF_TRUTH.md | 本文件：结构与导航总览 |
+| opencode.json | OpenCode 项目配置（技能权限等） |
+
+交付物类 Markdown（根目录，共 27 个左右）：如 ADAS_DELIVERABLES.md、FUNCTIONAL_SAFETY_DELIVERABLES.md、ZONAL_DELIVERABLES.md 等，详见仓库根目录列表。
+
+---
+
+## 关键目录
 
 ```
 automotive-claude-code-agents/
-├── skills/              # 80 automotive domain skills
-├── agents/              # 22 specialized expert agents
-├── commands/            # 32 automation commands (shell)
-├── workflows/           # 6 development workflows (YAML)
-├── rules/               # 10 coding/safety/security standards
-├── hooks/               # 17 git lifecycle hooks
-├── knowledge-base/      # Standards reference (AUTOSAR, ISO 26262)
-├── tools/               # Tool routing, adapters, LLM council
-├── examples/            # 7 example projects with production code
-├── tests/               # Unit, integration, E2E test suites
-└── docs/                # Getting started, architecture guides
+├── skills/              # 按领域划分的技能素材（YAML 等）
+├── agents/              # 智能体定义
+├── commands/            # 自动化命令（shell）
+├── workflows/           # 工作流（YAML）
+├── rules/               # 编码 / 安全规范
+├── hooks/               # Git 生命周期钩子
+├── knowledge-base/      # 标准与协议参考
+├── tools/               # Python 工具与适配
+├── examples/            # 示例工程
+├── tests/               # 测试
+├── docs/                # 文档与教程
+└── install.sh           # 安装脚本（Claude 与 OpenCode 技能路径）
 ```
 
 ---
 
-## Installation
-
-### Quick Install
+## 安装
 
 ```bash
-# Clone repository
-git clone https://github.com/yourusername/automotive-claude-code-agents.git
+git clone https://github.com/LivingElect/automotive-claude-code-agents.git
 cd automotive-claude-code-agents
 
-# Install into Claude Code
-./install.sh
-
-# Or install to specific project
-./install.sh --project /path/to/your/project
+./install.sh --dry-run   # 仅预览
+./install.sh             # 安装到 ~/.claude，并同步 OpenCode 技能目录（见下节）
+# 或仅针对某工程：
+./install.sh --project /你的工程路径
 ```
 
-### Verification
+验证与卸载：
 
 ```bash
-# Count skills
+./install.sh --status
+./install.sh --uninstall
+```
+
+可选：统计技能文件、运行测试：
+
+```bash
 find skills/ -name "*.yaml" -not -path "*/_templates/*" | wc -l
-# Expected: 80+
-
-# Count agents
-find agents/ -name "*.yaml" | wc -l
-# Expected: 22+
-
-# Run tests
 pytest tests/ -v
 ```
 
 ---
 
-## Usage Examples
+## OpenCode 使用方法
 
-### Example 1: ADAS Sensor Fusion
+安装脚本会按 [OpenCode Agent Skills](https://opencode.ai/docs/skills) 生成 **`SKILL.md`**（frontmatter 含 `name`、`description`、`license`、`compatibility`、`metadata`；**`description` 为中文**），并把技能安装到 OpenCode 可扫描的目录。
 
-```bash
-claude "Using adas-perception-engineer agent and
-automotive-adas/sensor-fusion-perception skill,
-create L2 ADAS perception with camera + radar fusion"
-```
+### 技能安装位置
 
-### Example 2: ISO 26262 HARA
+| 场景 | OpenCode 技能目录 |
+|------|-------------------|
+| 默认执行 `./install.sh`（未加 `--project`） | `~/.config/opencode/skills/automotive-<领域>/` |
+| 执行 `./install.sh --project /path/to/proj` | `/path/to/proj/.opencode/skills/automotive-<领域>/` |
 
-```bash
-claude "Using safety-engineer agent, perform HARA
-for brake-by-wire system per ISO 26262 ASIL-D"
-```
+每个目录内有 **`SKILL.md`** 与指向本仓库 `skills/<领域>/` 的 **`content/`** 链接，便于按需读取完整 YAML 库。
 
-### Example 3: Zonal Architecture
+### 项目配置
 
-```bash
-claude "Using zonal-architect agent, design 6-zone
-E/E architecture with Ethernet TSN backbone"
-```
+仓库根目录的 **`opencode.json`** 为 `automotive-*` 技能声明加载权限。可选：在本仓库根使用 OpenCode；或将该文件复制到你的业务工程根目录并与现有 OpenCode 配置合并。
 
-See QUICK_START.md for 10 complete examples.
+### 建议步骤
 
----
+1. 安装 [OpenCode](https://opencode.ai/docs) 并配置模型与 API（如交互中执行 `/connect`）。  
+2. 在本仓库或目标工程执行 **`./install.sh`**（工程场景可加 **`--project`**）。  
+3. **`cd` 到含有 `opencode.json` 的目录**，执行 **`opencode`** 启动。  
+4. 在对话中通过内置 **`skill`** 工具按名称加载技能（与目录名一致，例如 `automotive-v2x`、`automotive-adas`；以 `~/.config/opencode/skills/` 或项目下 `.opencode/skills/` 中实际文件夹名为准）。  
+5. 需要细则时，让智能体读取该技能目录下 **`content/`** 中的 YAML。
 
-## Quality Metrics
+### 与 Claude Code 的简要对照
 
-### Documentation Quality
+- **Claude Code**：`claude` 命令、`/automotive …` 等，内容在 `~/.claude/`。  
+- **OpenCode**：TUI 或 `opencode run` 等，通过 **`skill`** 按名加载；本仓库只提供规范 **`SKILL.md`** 与 **`content/`** 链接。
 
-| Metric | Value |
-|--------|-------|
-| Avg Words per Skill | 4,200 |
-| Skills with Production Code | 78/80 (97.5%) |
-| Skills with Benchmarks | 65/80 (81.25%) |
-| Skills with Hardware Examples | 72/80 (90%) |
-| Skills with Safety Notes | 68/80 (85%) |
+### 常见问题
 
-### Code Quality
-
-| Metric | Value |
-|--------|-------|
-| Code with Comments | 65% |
-| Python Type Hints | 90% |
-| C Code MISRA Notes | 85% |
-| Production Functions | 450+ |
-| Test Examples | 165+ |
+- 列表里看不到技能：确认 **`SKILL.md` 全大写**、frontmatter 含 **`name` 与 `description`**、且 **`name` 与父目录名一致**。  
+- 无法加载：检查 **`opencode.json`** 里 `permission.skill` 是否允许 `automotive-*`。  
+- Windows 下 **`content/`** 链接失败：在开发者模式或管理员权限下用 **Git Bash / WSL** 执行 **`./install.sh`**。
 
 ---
 
-## Community & Support
+## 使用示例（OpenCode）
 
-### Contributing
+在已安装技能且当前目录含 **`opencode.json`** 时，可先加载技能再提问，例如：
 
-See CONTRIBUTING.md for guidelines.
+- 加载 **`automotive-adas`**：请说明「摄像头 + 毫米波雷达融合」的 L2 感知方案要点。  
+- 加载 **`automotive-safety`**：请按 ISO 26262 ASIL-D 梳理线控制动 HARA 条目结构。
 
-### License
-
-MIT License - Free for commercial use.
-
-### Acknowledgments
-
-Built by automotive software engineering community for the community.
-
-Total effort: ~1,200 hours of expert engineering
-Total value: $228,000+ in development time savings
+（具体交互以当前 OpenCode 版本与 **`skill`** 工具为准。若使用 **Claude Code**，可参见 **QUICK_START.md** 中的 `claude "..."` 示例。）
 
 ---
 
-**This repository represents the most comprehensive automotive software development resource available for Claude Code users.**
+## 质量指标（参考）
 
-For detailed navigation, see README.md and domain-specific deliverable files.
+| 指标 | 数值（约） |
+|------|------------|
+| 单技能平均字数 | 4,200 |
+| 含生产级代码示例的技能占比 | 约 97% |
+| 含硬件相关示例的技能占比 | 约 90% |
+
+---
+
+## 社区与支持
+
+- 贡献方式见 **CONTRIBUTING.md**。  
+- 许可证：**MIT**（可商用）。  
+
+更完整的面向用户的说明见 **README.md** 与 **README_CN.md**；按领域交付物见根目录各 `*_DELIVERABLES.md` 文件。
